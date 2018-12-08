@@ -5,13 +5,17 @@ namespace SortLabDotNetCore
 
     public static partial class Algorithm<T> where T:IComparable
     {
+        public static void QuickSort(T[] arr)
+        {
+            QuickSort(arr, 0, arr.Length-1);
+        }
         ///The basic idea is to choose an element called pivot.
         ///Then move items less than pivot to left
         ///Move items greater than pivot to right
         ///The pivot is in its sorted position now.
         ///Repeat the same for items on the left of pivot
         ///and for items on the right of pivot
-        public static void QuickSort(T[] arr, int left, int right)
+        private static void QuickSort(T[] arr, int left, int right)
         {
             if (left >= right)
             {
