@@ -3,7 +3,7 @@ using System;
 namespace SortLabDotNetCore
 {
 
-    public static partial class Algorithm
+    public static partial class Algorithm<T> where T:IComparable
     {
         ///The basic idea is to choose an element called pivot.
         ///Then move items less than pivot to left
@@ -11,7 +11,7 @@ namespace SortLabDotNetCore
         ///The pivot is in its sorted position now.
         ///Repeat the same for items on the left of pivot
         ///and for items on the right of pivot
-        public static void QuickSort(int[] arr, int left, int right)
+        public static void QuickSort(T[] arr, int left, int right)
         {
             if (left >= right)
             {
@@ -26,7 +26,7 @@ namespace SortLabDotNetCore
 
         }
 
-        private static int Partition(int[] arr, int left, int right)
+        private static int Partition(T[] arr, int left, int right)
         {
             var currLength = right - left + 1;
             if (currLength == 1)
@@ -39,8 +39,8 @@ namespace SortLabDotNetCore
             while (j <= right)
             {
                 if (
-                    (j < pivot && arr[j] <= arr[pivot])
-                 || (j > pivot && arr[j] >= arr[pivot])
+                    (j < pivot && arr[j].CompareTo(arr[pivot]) <= 0)
+                 || (j > pivot && arr[j].CompareTo(arr[pivot]) >=0)
                  || j == pivot)
                 {
                     j++;
@@ -61,7 +61,7 @@ namespace SortLabDotNetCore
 
         }
 
-        private static void Swap(int[] arr, int i, int j)
+        private static void Swap(T[] arr, int i, int j)
         {
             var temp = arr[i];
             arr[i] = arr[j];
